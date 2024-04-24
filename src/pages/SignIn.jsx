@@ -9,7 +9,7 @@ const SignIn = () => {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // New state for tracking login status
+  const [isLoggedIn, setIsLoggedIn] = useState(false); 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,7 +23,7 @@ const SignIn = () => {
     try {
       const response = await axios.post(`${API}/auth/signin`, signInData);
       console.log("Signin Success:", response.data);
-      setIsLoggedIn(true); // Set isLoggedIn to true upon successful login
+      setIsLoggedIn(true); 
     } catch (err) {
       console.error("Signin Error:", err.message);
       if (err.response) {
@@ -46,7 +46,6 @@ const SignIn = () => {
     }
   };
 
-  // Render UI based on login status
   if (isLoggedIn) {
     return (
       <div className="flex flex-col items-center pt-10 gap-3 text-2xl">
