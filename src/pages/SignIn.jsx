@@ -10,9 +10,34 @@ const SignIn = () => {
   const [errorMessage, setErrorMessage] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false); 
+   const [formErrors, setFormErrors] = useState({
+     username: "",
+     password: "",
+   });
+
+   const validateForm = () => {
+    const errors = {}; 
+
+    if (!fullName.trim()) {
+      errors.fullName = "Please enter your full name.";
+    }
+
+    if (!username.trim()) {
+      errors.username = "Please enter your email.";
+    } else if (!/^[^\s@]+@[^\.net]+\.[^\.com]+$/.test(username)) {
+      errors.username = "Please enter a valid email address.";
+    }
+    if (!password.trim()) {
+      errors.password = "Please enter your password.";
+    }
+
+     setFormErrors(errors);
+     return Object.keys(errors).length === 0; 
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     setIsSubmitting(true);
 
     const signInData = {
@@ -72,20 +97,30 @@ const SignIn = () => {
           <input
             type="text"
             placeholder="Email"
-            className="py-3 px-3 rounded-lg hover:shadow-md bg-[#fdfdfd] hover:bg-[#393639] hover:text-[white]  transition-all duration-500"
+            className={`py-3 px-3 rounded-lg hover:shadow-md bg-[#fdfdfd] hover:bg-[#393639] hover:text-[white]  transition-all duration-500 ${
+              formErrors.username ? "border border-red-500" : ""
+            }`}
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
+          {formErrors.fullName && (
+            <span className="text-red-500 text-sm">{formErrors.username}</span>
+          )}{" "}
           <input
             type="password"
             placeholder="Password"
-            className="py-3 px-3 rounded-lg hover:shadow-md bg-[#fdfdfd] hover:bg-[#393639] hover:text-[white]  transition-all duration-500"
+            className={`py-3 px-3 rounded-lg hover:shadow-md bg-[#fdfdfd] hover:bg-[#393639] hover:text-[white]  transition-all duration-500 ${
+              formErrors.password ? "border border-red-500" : ""
+            }`}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          {errorMessage && (
-            <p className="text-[#ea3b35]">{errorMessage}</p>
-          )}
+          {formErrors.password && (
+            <span className="text-red-500 text-sm">{formErrors.password}</span>
+          )}{" "}
+
+
+          {errorMessage && <p className="text-[#ea3b35]">{errorMessage}</p>}
         </form>
         <button
           className={`w-[40%] mt-5 py-2  text-[#1f1f23] font-bold rounded-lg mb-4 bg-indigo-600 hover:bg-indigo-700 hover:text-[white] transition-all duration-500`}

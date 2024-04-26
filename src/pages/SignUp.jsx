@@ -11,6 +11,7 @@ const SignUp = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState(null); 
   const [formErrors, setFormErrors] = useState({
+    fullName: "",
     username: "",
     password: "",
     confirmPassword: "",
@@ -20,13 +21,18 @@ const SignUp = () => {
   const validateForm = () => {
     const errors = {}; 
 
-    if (!username.trim()) {
-      errors.username = "Please enter your email.";
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(username)) {
-      errors.username = "Please enter a valid email address.";
+    if (!fullName.trim()) {
+      errors.fullName = "Please enter your full name.";
     }
 
-    if (password.length < 8) {
+    if (!username.trim()) {
+      errors.username = "Please enter your email.";
+    } else if (!/^[^\s@]+@[^\.net]+\.[^\.com]+$/.test(username)) {
+      errors.username = "Please enter a valid email address.";
+    }
+    if (!password.trim()) {
+      errors.password = "Please enter your password.";
+    } else if (password.length < 8) {
       errors.password = "Password must be at least 8 characters long.";
     }
 
@@ -92,7 +98,7 @@ const SignUp = () => {
       ) : (
         <div className="w-[100vw] h-[100vh] flex flex-col items-center justify-center bg-[#486761]">
           <h1 className="mb-8 font-bold text-3xl">REGISTER HERE</h1>
-          <div className="flex flex-col items-center justify-center py-5 w-[70%] h-[80%] lg:w-[40%] lg:h-[80%] bg-[#613d64] rounded-3xl">
+          <div className="flex flex-col items-center justify-center py-5 w-[70%] h-[85%] lg:w-[40%] lg:h-[85%] bg-[#613d64] rounded-3xl">
             <h1 className="text-2xl font-medium mb-7">SIGN UP</h1>
             <form
               className="flex flex-col gap-6 w-full px-6 lg:px-10"
@@ -101,11 +107,17 @@ const SignUp = () => {
               <input
                 type="text"
                 placeholder="Full Name"
-                className="py-3 px-3 rounded-lg hover:shadow-md bg-[#fdfdfd] hover:bg-[#393639] hover:text-[white] transition-all duration-500"
+                className={`py-3 px-3 rounded-lg hover:shadow-md bg-[#fdfdfd] hover:bg-[#393639] hover:text-[white] transition-all duration-500 ${
+                  formErrors.fullName ? "border border-red-500" : ""
+                }`}
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
               />
-             
+              {formErrors.fullName && (
+                <span className="text-red-500 text-sm">
+                  {formErrors.username}
+                </span>
+              )}{" "}
               <input
                 type="text"
                 placeholder="Email"
@@ -120,11 +132,12 @@ const SignUp = () => {
                   {formErrors.username}
                 </span>
               )}{" "}
-        
               <input
                 type="password"
                 placeholder="Password"
-                className="py-3 px-3 rounded-lg hover:shadow-md bg-[#fdfdfd] hover:bg-[#393639] hover:text-[white] transition-all duration-500"
+                className={`py-3 px-3 rounded-lg hover:shadow-md bg-[#fdfdfd] hover:bg-[#393639] hover:text-[white] transition-all duration-500 ${
+                  formErrors.password ? "border border-red-500" : ""
+                }`}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
@@ -133,7 +146,6 @@ const SignUp = () => {
                   {formErrors.password}
                 </span>
               )}{" "}
-              
               <input
                 type="password"
                 placeholder="Confirm Password"

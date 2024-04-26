@@ -42,8 +42,8 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div className="w-full h-screen flex items-center justify-center bg-gray-200">
-      <div className="bg-[#a29494] p-8 rounded-lg shadow-md w-96">
+    <div className="w-full h-screen flex items-center justify-center bg-[#486761]">
+      <div className="bg-[#613d64] p-8 rounded-lg shadow-md w-96">
         <h2 className="text-2xl font-semibold mb-4">Forgot Password</h2>
         {errorMessage && <p className="text-red-500">{errorMessage}</p>}
         {successMessage && <p className="text-green-500">{successMessage}</p>}
@@ -51,7 +51,7 @@ const ForgotPassword = () => {
           <div className="mb-4">
             <label
               htmlFor="email"
-              className="block text-xl font-medium text-gray-700"
+              className="block text-xl font-medium text-black"
             >
               Email
             </label>

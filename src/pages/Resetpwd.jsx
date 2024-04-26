@@ -23,7 +23,7 @@ const ResetPassword = () => {
     }
 
     try {
-      const response = await axios.post(`${API}/auth/reset-password`, {
+      const response = await axios.post(`${API}/auth/resetpwd`, {
         token,
         password,
       });
@@ -38,8 +38,8 @@ const ResetPassword = () => {
   };
 
   return (
-    <div className="w-full h-screen flex items-center justify-center bg-gray-200">
-      <div className="bg-[gray] p-8 rounded-lg shadow-md w-96">
+    <div className="w-full h-screen flex items-center justify-center bg-[#486761]">
+      <div className="bg-[#613d64] p-8 rounded-lg shadow-md w-96">
         <h2 className="text-2xl font-semibold mb-4">Reset Password</h2>
         {successMessage && (
           <p className="text-green-600 mb-4">{successMessage}</p>
@@ -49,7 +49,7 @@ const ResetPassword = () => {
           <div className="mb-4">
             <label
               htmlFor="password"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-black"
             >
               New Password
             </label>
@@ -65,7 +65,7 @@ const ResetPassword = () => {
           <div className="mb-4">
             <label
               htmlFor="confirmPassword"
-              className=" block text-sm font-medium text-gray-700"
+              className=" block text-sm font-medium text-black"
             >
               Confirm Password
             </label>
