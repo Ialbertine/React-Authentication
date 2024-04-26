@@ -96,12 +96,11 @@ const SignUp = () => {
           </button>
         </div>
       ) : (
-        <div className="w-[100vw] h-[100vh] flex flex-col items-center justify-center bg-[#486761]">
-          <h1 className="mb-8 font-bold text-3xl">REGISTER HERE</h1>
+        <div className=" h-[100vh] flex items-center justify-center bg-[#486761]">
           <div className="flex flex-col items-center justify-center py-5 w-[70%] h-[85%] lg:w-[40%] lg:h-[85%] bg-[#613d64] rounded-3xl">
-            <h1 className="text-2xl font-medium mb-7">SIGN UP</h1>
+            <h1 className="text-2xl font-bold pb-[3rem]">SIGN UP</h1>
             <form
-              className="flex flex-col gap-6 w-full px-6 lg:px-10"
+              className="flex flex-col gap-[2rem] w-full px-6 lg:px-10"
               onSubmit={handleSubmit}
             >
               <input
