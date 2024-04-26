@@ -6,13 +6,13 @@ const API = "https://contact-app-server-nxgi.onrender.com/api/v1/contactapp";
 
 const SignUp = () => {
   const [fullName, setFullName] = useState("");
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState(null); 
   const [formErrors, setFormErrors] = useState({
     fullName: "",
-    username: "",
+    email: "",
     password: "",
     confirmPassword: "",
   });
@@ -25,10 +25,10 @@ const SignUp = () => {
       errors.fullName = "Please enter your full name.";
     }
 
-    if (!username.trim()) {
-      errors.username = "Please enter your email.";
-    } else if (!/^[^\s@]+@[^\.net]+\.[^\.com]+$/.test(username)) {
-      errors.username = "Please enter a valid email address.";
+    if (!email.trim()) {
+      errors.email = "Please enter your email.";
+    } else if (!/^[^\s@]+@[^\.@]+\.[^\.@]+$/.test(email)) {
+      errors.email = "Please enter a valid email address.";
     }
     if (!password.trim()) {
       errors.password = "Please enter your password.";
@@ -54,7 +54,7 @@ const SignUp = () => {
     setIsSubmitting(true);
 
     const signUpData = {
-      email: username,
+      email: email,
       password,
       confirmPassword,
       fullName,
@@ -64,12 +64,12 @@ const SignUp = () => {
       const response = await axios.post(`${API}/auth/signup`, signUpData);
       console.log("Signup Success:", response.data);
       setErrorMessage("You Have Successfully Registered!!");
-      setUsername("");
+      setEmail("");
       setPassword("");
       setConfirmPassword("");
       setFullName("");
       setFormErrors({
-        username: "",
+        email: "",
         password: "",
         confirmPassword: "",
 
@@ -84,9 +84,9 @@ const SignUp = () => {
   return (
     <>
       {errorMessage ? (
-        <div className="flex flex-col items-center pt-10 gap-3 text-2xl">
+        <div className="flex flex-col items-center pt-10 gap-3 text-2xl text-white">
           <span className="text-[blue] font-semibold ">
-            You Have Successfully Registered!!
+            You Have Successfully Registered!!  
           </span>
           <span>
             Click on the button below to Continue to the Sign In page to Log in
@@ -114,23 +114,26 @@ const SignUp = () => {
               />
               {formErrors.fullName && (
                 <span className="text-red-500 text-sm">
-                  {formErrors.username}
+                  {formErrors.fullName}
                 </span>
               )}{" "}
+
               <input
-                type="text"
+                type="email"
                 placeholder="Email"
                 className={`py-3 px-3 rounded-lg hover:shadow-md bg-[#fdfdfd] hover:bg-[#393639] hover:text-[white] transition-all duration-500 ${
-                  formErrors.username ? "border border-red-500" : ""
+                  formErrors.email ? "border border-red-500" : ""
                 }`}
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
-              {formErrors.username && (
+              {formErrors.email && (
                 <span className="text-red-500 text-sm">
-                  {formErrors.username}
+                  {formErrors.email}
                 </span>
               )}{" "}
+
+              
               <input
                 type="password"
                 placeholder="Password"
